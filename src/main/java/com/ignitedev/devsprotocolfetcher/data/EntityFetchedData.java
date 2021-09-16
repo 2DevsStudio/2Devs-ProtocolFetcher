@@ -18,5 +18,4 @@ public class EntityFetchedData implements Fetchable {
 
   private final Map<Integer, String> metaData = new HashMap<>();
 
-
 }

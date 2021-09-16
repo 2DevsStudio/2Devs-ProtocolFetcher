@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Getter;
@@ -23,6 +25,7 @@ import org.jsoup.nodes.Document;
 public class ProtocolFetcherAPI {
 
   private static final String URL = "https://pokechu22.github.io/Burger/";
+  private static final Logger logger = Logger.getLogger(ProtocolFetcherAPI.class.getName());
 
   @Setter
   @Getter
@@ -30,12 +33,10 @@ public class ProtocolFetcherAPI {
 
   @Getter
   private final Document document;
-  private final Logger logger = Logger.getLogger(ProtocolFetcherAPI.class.getName());
+  private final Map<String, List<? extends Fetchable>> fetchedData = new HashMap<>();
 
-  private final List<Fetchable> fetchedDataList = new ArrayList<>();
-
-  @Nullable
-  private EntityFetchedData entityFetchedData;
+  @Getter
+  private List<EntityFetchedData> entitesFetchedData = new ArrayList<>();
 
 
   @SneakyThrows
@@ -53,14 +54,43 @@ public class ProtocolFetcherAPI {
 
   @SneakyThrows
   public void fetchData() {
-    List<EntityFetchedData> entityFetchedData = new DataFetcher(document).fetchEntities();
+    this.entitesFetchedData = new DataFetcher(document).fetchEntities();
 
-    DebugUtility.info("found entities:");
+    DebugUtility.info("found entities: " + this.entitesFetchedData.toString());
 
-    for (EntityFetchedData data : entityFetchedData) {
-      DebugUtility.info(data.toString());
-    }
+    fetchedData.put(this.entitesFetchedData.get(0).getFetchedDataName(), this.entitesFetchedData);
   }
+
+  @Nullable
+  public EntityFetchedData getEntityByProtocolID(int protocolId) {
+    for (EntityFetchedData data : entitesFetchedData) {
+      if (data.getProtocolID() == protocolId) {
+        return data;
+      }
+    }
+    return null;
+  }
+
+  @Nullable
+  public EntityFetchedData getEntityByDisplayName(String displayName) {
+    for (EntityFetchedData data : entitesFetchedData) {
+      if (data.getDisplayName().equalsIgnoreCase(displayName)) {
+        return data;
+      }
+    }
+    return null;
+  }
+
+  @Nullable
+  public EntityFetchedData getEntityByTypeName(String typeName) {
+    for (EntityFetchedData data : entitesFetchedData) {
+      if (data.getTypeName().equalsIgnoreCase(typeName)) {
+        return data;
+      }
+    }
+    return null;
+  }
+
 
 
 }
