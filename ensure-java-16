@@ -6,11 +6,10 @@ echo $JV | sed -E 's/^.*version "([^".]*)\.[^"]*".*$/\1/'
 if [ "$JV" != 16 ]; then
 	case "$1" in
 	install)
-		echo "Installing SDKMAN..."
+		echo "installing sdkman..."
 		curl -s "https://get.sdkman.io" | bash
 		source ~/.sdkman/bin/sdkman-init.sh
-		sdk version
-		sdk install java 16.0.1-adpt
+		sdk install java 16.0.1-open
 		;;
 	use)
 		echo "must source ~/.sdkman/bin/sdkman-init.sh"
