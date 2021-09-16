@@ -1,18 +1,22 @@
 package com.ignitedev.devsprotocolfetcher.data;
 
+import com.ignitedev.devsprotocolfetcher.interfaces.Fetchable;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Data;
 
 @Data
-public class EntityFetchedData {
+public class EntityFetchedData implements Fetchable {
 
-  private int protocolID;
-  private String typeName;
-  private String displayName;
-  private double height;
-  private double width;
+  private final String fetchedDataName = "Entities";
 
-  private Map<Integer, String> metaData = new HashMap<>();
+  private final int protocolID;
+  private final String typeName;
+  private final String displayName;
+  private final double height;
+  private final double width;
+
+  private final Map<Integer, String> metaData = new HashMap<>();
+
 
 }

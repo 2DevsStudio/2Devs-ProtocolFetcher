@@ -15,7 +15,8 @@ public enum MetaDataFieldType {
   BYTE(byte.class, new String[]{"byte"}),
   STRING(String.class, new String[]{"string", "text", "str"}),
   BLOCK_POSITION(Object.class, new String[]{"blockpos", "blockposition"}),
-  UUID(java.util.UUID.class, new String[]{"uuid", "uid"});
+  UUID(java.util.UUID.class, new String[]{"uuid", "uid"}),
+  PARTICLE(Object.class, new String[]{"particle"});
 
   private final Class<?> fieldTypeClass;
   private final String[] textValues;
