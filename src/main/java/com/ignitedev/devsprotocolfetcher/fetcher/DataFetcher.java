@@ -45,7 +45,8 @@ public class DataFetcher {
       }
       String href = first.attr("href");
 
-      if(href.contains("~") || !href.startsWith(ENTITIES)){ // ex: https://pokechu22.github.io/Burger/1.17.1.html#entities:area_effect_cloud
+      if (href.contains("~") || !href.startsWith(
+          ENTITIES)) { // ex: https://pokechu22.github.io/Burger/1.17.1.html#entities:area_effect_cloud
         continue;
       }
       entities.add(
@@ -70,11 +71,21 @@ public class DataFetcher {
 
     for (Entry<String, String> pairedEntry : getPairedEntityDataWithoutMetaData(tab).entrySet()) {
       switch (pairedEntry.getKey()) {
-        case "ID" -> protocolID = Integer.parseInt(pairedEntry.getValue());
-        case "Name" -> typeName = pairedEntry.getValue();
-        case "Display name" -> displayName = pairedEntry.getValue();
-        case "Height" -> height = Double.parseDouble(pairedEntry.getValue());
-        case "Width" -> width = Double.parseDouble(pairedEntry.getValue());
+        case "ID":
+          protocolID = Integer.parseInt(pairedEntry.getValue());
+          break;
+        case "Name":
+          typeName = pairedEntry.getValue();
+          break;
+        case "Display name":
+          displayName = pairedEntry.getValue();
+          break;
+        case "Height":
+          height = Double.parseDouble(pairedEntry.getValue());
+          break;
+        case "Width":
+          width = Double.parseDouble(pairedEntry.getValue());
+          break;
       }
     }
     return new EntityFetchedData(protocolID, typeName, displayName, height, width);
