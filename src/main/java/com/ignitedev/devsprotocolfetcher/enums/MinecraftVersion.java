@@ -23,7 +23,7 @@ public enum MinecraftVersion {
   private final String[] rawValues;
 
   @Nullable
-  public MinecraftVersion getVersionByRaw(String raw) {
+  public static MinecraftVersion getVersionByRaw(String raw) {
     for (MinecraftVersion version : values()) {
       for (String textValue : version.getRawValues()) {
         if (textValue.equalsIgnoreCase(raw)) {

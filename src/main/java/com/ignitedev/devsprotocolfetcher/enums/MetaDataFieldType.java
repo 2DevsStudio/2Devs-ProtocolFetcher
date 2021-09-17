@@ -23,7 +23,7 @@ public enum MetaDataFieldType {
 
 
   @Nullable
-  public MetaDataFieldType getEnumByString(String string) {
+  public static MetaDataFieldType getEnumByString(String string) {
     for (MetaDataFieldType value : values()) {
       for (String textValue : value.getTextValues()) {
         if (textValue.equalsIgnoreCase(string)) {
