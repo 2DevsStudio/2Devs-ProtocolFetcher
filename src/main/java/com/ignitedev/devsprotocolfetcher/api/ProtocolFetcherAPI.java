@@ -1,6 +1,7 @@
 package com.ignitedev.devsprotocolfetcher.api;
 
 import com.ignitedev.devsprotocolfetcher.data.EntityFetchedData;
+import com.ignitedev.devsprotocolfetcher.enums.MinecraftVersion;
 import com.ignitedev.devsprotocolfetcher.fetcher.DataFetcher;
 import com.ignitedev.devsprotocolfetcher.interfaces.Fetchable;
 import com.ignitedev.devsprotocolfetcher.util.DebugUtility;
@@ -40,8 +41,8 @@ public class ProtocolFetcherAPI {
 
 
   @SneakyThrows
-  public ProtocolFetcherAPI(String minecraftVersion) {
-    URI uri = new URI(URL + minecraftVersion + ".html");
+  public ProtocolFetcherAPI(MinecraftVersion minecraftVersion) {
+    URI uri = new URI(URL + minecraftVersion.getId() + ".html");
     URLConnection urlConnection = uri.toURL().openConnection();
     InputStream inputStream = urlConnection.getInputStream();
     String encoding =
